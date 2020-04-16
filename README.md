@@ -8,3 +8,5 @@ if the extension is not running. :D
 
 If you like this then [buy me a coffee](https://www.buymeacoffee.com/mirswith)
 to help continue support.  Thank you.
+
+![Example](media/screenshot1.jpg)
