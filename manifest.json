@@ -1,0 +1,21 @@
+{
+   "name": "Trump Bites",
+   "version": "1.0",
+   "description": "Making news fun again.",
+   "minimum_chrome_version": "37",
+   "background": {
+     "scripts": ["background.js"]
+   },
+   "permissions": [
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": ["content.js"]
+        }
+   ],
+   "manifest_version": 2
+ }
