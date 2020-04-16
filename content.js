@@ -181,8 +181,8 @@ var observer = new MutationObserver(function(mutations) {
     //console.log("document changed.");
     //console.log(mutations);
     mutations.forEach(function(mutation) {
-        console.log(mutation.target.toString());
         mutation.addedNodes.forEach(function(node) {
+            console.log("test");
             scanNode(node);
         });
     });

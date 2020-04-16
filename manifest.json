@@ -16,6 +16,9 @@
                "http://*/*",
                "https://*/*"
            ],
+           "exclude_matches": [
+               "https://github.com/*"
+           ],
            "js": ["content.js"]
        }
    ],
