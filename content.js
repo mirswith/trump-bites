@@ -81,7 +81,6 @@ var noun = [
     "Airhead",
     "Ass",
     "Asshat",
-    "Asshole",
     "Birdbrain",
     "Blockhead",
     "Bonehead",
