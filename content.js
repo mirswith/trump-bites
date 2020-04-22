@@ -9,6 +9,7 @@ var adjective = [
     "Bovine",
     "Brain-Dead",
     "Brainless",
+    "Buttfaced",
     "Careless",
     "Certifiable",
     "Crackbrained",
@@ -20,12 +21,14 @@ var adjective = [
     "Demented",
     "Dense",
     "Deranged",
+    "Dimwitted",
     "Distrubed",
     "Doltish",
     "Dull-Witted",
     "Dumb",
     "Empty-Headed",
     "Fat-Headed",
+    "Fat",
     "Fatuous",
     "Futile",
     "Gluttonous",
@@ -35,6 +38,7 @@ var adjective = [
     "Halfwitted",
     "Idiotic",
     "Ignorant",
+    "Illogical",
     "Inane",
     "Inept",
     "Insane",
@@ -45,7 +49,9 @@ var adjective = [
     "Moronic",
     "Naive",
     "Nonsensical",
+    "Orange",
     "Out To Lunch",
+    "Pathological",
     "Pig-Ignorant",
     "Pointless",
     "Psychotic",
@@ -59,9 +65,11 @@ var adjective = [
     "Simpleminded",
     "Slow-Witted",
     "Slow",
+    "Spray Tanned",
     "Stupid",
     "Thick",
     "Thickheaded",
+    "Twofaced",
     "Unbalanced",
     "Unhinged",
     "Unintelligent",
@@ -72,21 +80,24 @@ var adjective = [
     "Venal",
     "Witless",
     "Wooden-Headed",
-    "Orange",
-    "Spray Tanned",
-    "Fat",
 ];
 
 var noun = [
     "Airhead",
+    "Alligator Turd",
     "Ass",
     "Asshat",
+    "Asshead",
+    "Assmonkey",
+    "Bastard",
     "Birdbrain",
     "Blockhead",
     "Bonehead",
     "Brick",
+    "Buffoon",
     "Butt",
     "Butthole",
+    "Camel Fart",
     "Cesspool",
     "Chump",
     "Cinder Block",
@@ -94,10 +105,14 @@ var noun = [
     "Clot",
     "Cretin",
     "Dipstick",
+    "Dodo Turd",
+    "Dog Turd",
     "Dolt",
+    "Donkey Fart",
     "Doorknob",
     "Dope",
     "Dullard",
+    "Dumbass",
     "Dumbbell",
     "Dummy",
     "Dunce",
@@ -107,16 +122,24 @@ var noun = [
     "Farthead",
     "Fathead",
     "Fool",
+    "Goat Turd",
     "Halfwit",
+    "Horse Fart",
+    "Idiot",
     "Imbecile",
     "Jackass",
     "Knob",
     "Knobhead",
+    "Knucklehead",
     "Lamebrain",
+    "Laughing Stock",
+    "Liar",
     "Loon",
     "Lunatic",
     "Madman",
     "Maniac",
+    "Monkey Turd",
+    "Monkey",
     "Moron",
     "Nincompoop",
     "Ninny",
@@ -140,6 +163,8 @@ var noun = [
     "Trumphole",
     "Turd",
     "Turdbrain",
+    "Twit",
+    "Wanker",
     "Wouldbe Dictator",
     "Wouldbe King",
 ];
@@ -153,8 +178,18 @@ function scanNode(node) {
     if( node instanceof HTMLScriptElement ) return;
     if( node instanceof HTMLStyleElement ) return;
 
+// webkit-user-modify
+
     if( node.childNodes.length == 0 && node instanceof Text )
     {
+        if( node.parentNode != null && node.parentNode instanceof Element )
+        {
+            var style = window.getComputedStyle(node.parentNode);
+            if( style.getPropertyValue("contenteditable") == true ) return;
+            var val = style.getPropertyValue("-webkit-user-modify")
+            if( val != null && val.indexOf("write")>=0 ) return; // read-write-plaintext-only;
+        }
+
         if( node.isElementContentWhitespace ) return;
 
         node.textContent = node.textContent.replace(/Trump/g, function() {
@@ -182,7 +217,6 @@ var observer = new MutationObserver(function(mutations) {
     //console.log(mutations);
     mutations.forEach(function(mutation) {
         mutation.addedNodes.forEach(function(node) {
-            console.log("test");
             scanNode(node);
         });
     });
